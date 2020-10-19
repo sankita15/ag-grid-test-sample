@@ -4,6 +4,7 @@ import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import TextBox from "./TextBox";
+import DatePickerComponent from "./DatePickerComponent";
 
 class App extends Component {
     constructor(props) {
@@ -15,29 +16,27 @@ class App extends Component {
                 headerName: "Model", cellRendererFramework: TextBox
             }, {
                 headerName: "Price", field: "price"
-            }],
+            }, {
+                headerName: "DateCol", cellRendererFramework: DatePickerComponent
+            },],
             rowData: [{
                 make: "Toyota", model: "Celica", price: 35000
-            }, {
-                make: "Ford", model: "Mondeo", price: 32000
-            }, {
-                make: "Porsche", model: "Boxter", price: 72000
             }]
         }
     }
 
     render() {
         return (
-            <div
-                className="ag-theme-alpine"
+            <div className="ag-theme-alpine"
                 style={{
-                    height: '250px',
-                    width: '600px' }}
+                    height: '38vh',
+                    width: '1000px' }}
             >
-                <AgGridReact suppressColumnVirtualisation={true}
+                <AgGridReact getRowHeight={() => 50}
                     columnDefs={this.state.columnDefs}
                     rowData={this.state.rowData}>
                 </AgGridReact>
+                <DatePickerComponent/>
             </div>
         );
     }
